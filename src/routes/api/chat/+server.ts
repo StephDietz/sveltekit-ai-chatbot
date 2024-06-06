@@ -10,13 +10,11 @@ const openai = createOpenAI({
 
 export const POST = (async ({ request }) => {
 	const { messages } = await request.json();
-	console.log(messages);
 
 	const result = await streamText({
 		model: openai('gpt-3.5-turbo'),
 		messages
 	});
-	console.log(result);
 
 	return result.toAIStreamResponse();
-}) satisfies RequestHandler;
+}) as RequestHandler;
